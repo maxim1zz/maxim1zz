@@ -69,7 +69,11 @@
 ## 📈 Contribution Graph
 
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=maxim1zz&bg_color=1A0B2E&color=E9D5FF&line=A855F7&point=F3E8FF&area=true&area_color=7E22CE&hide_border=false&border_color=7E22CE&custom_title=Maxim's%20Contribution%20Graph" alt="Contribution Graph" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/maxim1zz/maxim1zz/output/snake-dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/maxim1zz/maxim1zz/output/snake-light.svg" />
+    <img src="https://raw.githubusercontent.com/maxim1zz/maxim1zz/output/snake-dark.svg" alt="Contribution Snake" />
+  </picture>
 </p>
 
 ---

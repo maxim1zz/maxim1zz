@@ -1,0 +1,39 @@
+name: Contribution Snake
+
+on:
+  schedule:
+    - cron: "0 3 * * *"   # täglich 03:00 UTC
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/snake.yml]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: snake
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Snake generieren
+        uses: Platane/snk@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/snake-dark.svg?palette=github-dark&color_snake=#A855F7&color_dots=#2D1B4E,#4C1D95,#7E22CE,#A855F7,#E9D5FF
+            dist/snake-light.svg?palette=github-light&color_snake=#7E22CE&color_dots=#EDE9F6,#D8B4FE,#C084FC,#A855F7,#7E22CE
+
+      - name: Auf Branch "output" veröffentlichen
+        working-directory: dist
+        run: |
+          git init -q -b output
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -q -m "Update contribution snake"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" output
