@@ -28,9 +28,13 @@ jobs:
             dist/snake-dark.svg?palette=github-dark&color_snake=#A855F7&color_dots=#2D1B4E,#4C1D95,#7E22CE,#A855F7,#E9D5FF
             dist/snake-light.svg?palette=github-light&color_snake=#7E22CE&color_dots=#EDE9F6,#D8B4FE,#C084FC,#A855F7,#7E22CE
 
+      # snk laeuft in Docker als root -> dist/ gehoert root, daher in eigenen Ordner kopieren
       - name: Auf Branch "output" veröffentlichen
-        working-directory: dist
         run: |
+          out="$RUNNER_TEMP/output"
+          mkdir -p "$out"
+          cp -r dist/. "$out"
+          cd "$out"
           git init -q -b output
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
